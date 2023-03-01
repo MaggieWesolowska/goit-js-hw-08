@@ -1,5 +1,10 @@
 import Player from '@vimeo/player';
 
+import throttle from 'lodash.throttle'
+
+// code example:
+ // const throttled = throttle(renewToken, 1000);
+
 const iframe = document.querySelector('iframe');
 
 const player = new Player(iframe);
@@ -13,34 +18,26 @@ const player = new Player(iframe);
     });
 
     const onPlay = function(data) {
-        duration: 61.857
-        percent: 0.049
-        seconds: 3.034
+        console.log(data);
+        localStorage.setItem('videoplayer-current-time', data.seconds);
     };
     
-    player.on('timeupdate', onPlay);
-
-    // player.on('timeupdate', function(data) {
+    // data:
+    // {
     //     duration: 61.857
-    //     percent: 0.049
-    //     seconds: 3.034
-    // });
-    
-    player.setCurrentTime(30.456).then(function(seconds) {
-        // seconds = the actual time that the player seeked to
-    }).catch(function(error) {
-        switch (error.name) {
-            case 'RangeError':
-                // the time was less than 0 or greater than the video’s duration
-                break;
-    
-            default:
-                // some other error occurred
-                break;
-        }
-    });
+    //     percent: 1
+    //     seconds: 61.857
+    // }
 
-    const throttle = require('lodash.throttle');
-    let throttled = _.throttle(renewToken, 300000, {'trailing': false});
-    jQuery(element).on('click', throttled);
+    player.on('timeupdate', throttle(onPlay, 1000));
+
+    const currentTime = Number(localStorage.getItem('videoplayer-current-time')) || 0;
+
+    player.setCurrentTime(currentTime);
+
+
+
+
+
+    
    
