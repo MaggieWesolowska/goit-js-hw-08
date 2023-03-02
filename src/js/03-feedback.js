@@ -15,21 +15,20 @@ const formInput = {
 form.addEventListener('input', getFormInput);
 
 submitBtn.addEventListener('submit', () => {
-    form.addEventListener('input', getFormInput);
-    console.log(formInput.value);
+    // form.addEventListener('input', getFormInput);
+    console.log(formInput);
     form.reset()
 })
 
 function getFormInput(event) {
     event.preventDefault();
-    
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(formInput));
     saveFormInput();
     // throttle(storage, 500);
 }
- 
+
 function saveFormInput() {
-    const savedFormInput = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || "");
+    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || "");
     email = LOCAL_STORAGE_KEY.email.value;
     message = LOCAL_STORAGE_KEY.message.value;
 }
