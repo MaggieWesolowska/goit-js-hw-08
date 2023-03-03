@@ -7,7 +7,7 @@ const LOCAL_STORAGE_KEY = 'feedback-form-state';
 
 form.addEventListener('input', throttle(getFormInput, 500));
 
-form.addEventListener('submit', event => {
+form.addEventListener('submit', (event) => {
   event.preventDefault();
   const formInput = {
     email: email.value,
