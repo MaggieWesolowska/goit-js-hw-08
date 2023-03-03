@@ -28,7 +28,7 @@ function getFormInput() {
 
 let stringInput = localStorage.getItem(LOCAL_STORAGE_KEY) || '';
 if (stringInput !== '') {
-  parsedInput = JSON.parse(stringInput);
+  let parsedInput = JSON.parse(stringInput);
   email.value = parsedInput.email;
   message.value = parsedInput.message;
 };
